@@ -1,0 +1,21 @@
+{
+  "name": "battleship",
+  "version": "1.0.0",
+  "description": "A battleship bot for discord",
+  "main": "app.js",
+  "scripts": {
+    "test": "node app.js"
+  },
+  "keywords": [
+    "battleship",
+    "discord",
+    "bot"
+  ],
+  "author": "Nightmare99",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^12.1.1",
+    "lodash": "^4.17.15"
+  },
+  "type": "module"
+}
