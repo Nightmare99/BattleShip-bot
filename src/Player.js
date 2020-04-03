@@ -85,11 +85,13 @@ export class Player {
         if (player.board[point].hasShip == false) {
             this.opponentBoard[point].status = 'miss';
             player.board[point].status = 'miss';
+            return 'miss';
         }
         else {
             this.opponentBoard[point].status = 'hit';
             this.opponentBoard[point].hasShip = true;
             player.board[point].status = 'hit';
+            return 'hit';
         }
     }
 }
