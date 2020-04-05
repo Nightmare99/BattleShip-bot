@@ -8,7 +8,7 @@ client.once('ready', () => {
 	console.log('Ready!');
 });
 
-client.login('Njk2MDI1MjY2MjMzMDE2MzUx.XoivKg.xD27AdkGMxi9CTDwJWj0NBPhtko');
+client.login('Nope :))))');
 
 var requests = {}; // to hold challenges until they are accepted
 var inGame = []; // all players who are in a game
