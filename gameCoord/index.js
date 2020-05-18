@@ -1,9 +1,11 @@
-import express from 'express';
-import Server from 'socket.io';
+var express = require('express');
+var app = express();
+var server = require('http').createServer(app).listen(3000);
+var io = require('socket.io').listen(server);
 
-const app = express();
-const io = new Server();
-
-app.listen(8080, () => {
-    console.log('Server running in port 8080')
+io.sockets.on('connection', function (socket) {
+    console.log('client connected');
+    socket.on('myID', data => {
+        console.log(data.id);
+    });
 });
