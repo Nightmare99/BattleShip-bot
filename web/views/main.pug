@@ -1,0 +1,47 @@
+html
+    head
+        title Battleship
+        include imports
+        script.
+            var socket;
+            $(document).ready(function(){
+                $('.modal').modal();
+                socket = io('http://localhost:3000/');
+            });
+            function createRoom(roomNum) {
+                console.log(roomNum);
+                socket.emit('createRoom', {roomNum: roomNum});
+            }
+
+    body
+        div(id="join",class="modal")
+            div(class="modal-content")
+                h4 Enter game code:
+                br
+                br
+                form(method="POST",action="/joinGame")
+                    div(class="input-field inline col s6")
+                        input(id="joinGameID" type="text" class="validate")
+                        label(for="joinGameID") Game ID
+                    submit(class="waves-effect waves btn-flat blue-text") Join room           
+
+        
+        div(id="create",class="modal")
+            div(class="modal-content")
+                h4 Enter game code:
+                br
+                br
+                div(class="input-field inline col s6")
+                    input(id="createGameID" type="text" class="validate")
+                    label(for="createGameID") Game ID
+                button(class="waves-effect waves btn-flat blue-text",onClick='createRoom(document.getElementById("createGameID").value)') Create room           
+        
+        div(class="container center-align scale-transition")
+            div(class="row") 
+                h1 Hello there
+                br
+                h2 Welcome to battleship.io
+            div(class="row")
+            a(class="waves-effect waves btn-flat blue-text modal-trigger",href="#join") Join room
+            a(class="waves-effect waves btn-flat blue-text modal-trigger",href="#create") Create room
+            

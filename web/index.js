@@ -4,11 +4,13 @@ var app = express();
 var io = require('socket.io-client');
 
 app.use(bodyParser.urlencoded({extended: false}));
+app.set('view engine', 'pug');
+app.set('views', './views');
 
 app.get('/', (req, res) => {
     var socket = io('http://localhost:3000/');
     socket.emit('connection');
-    res.write("<h1>Client should be connected</h1>");
+    res.render('main');
     socket.emit('myID', {id: 1000});
     res.end();
 });
