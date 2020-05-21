@@ -21,6 +21,24 @@ io.sockets.on('connection', function (socket) {
         if (isRoomAvailable(data.roomNum)) {
             gameList.push(data.roomNum);
             console.log(gameList);
+            socket.emit('roomCreated', {roomNum: data.roomNum});
+            socket.join(data.roomNum);
+        }
+        else {
+            console.log('room: ' + data.roomNum + ' under use');
+            socket.emit('roomUsed');
         }
     });
+
+    socket.on('joinRoom', data => {
+        io.of('/').in(data.roomNum).clients((err, clients) => {
+            if (err) socket.emit('room404');
+            else if (clients.length > 2) socket.emit('roomOverload');
+            else if (!clients.includes(socket.id)) {
+                socket.join(data.roomNum);
+                socket.emit('confirmJoin', {roomNum: data.roomNum});
+                console.log(socket.id + ' joined room ' + data.roomNum);
+            }
+        });
+    })
 });

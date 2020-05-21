@@ -11,7 +11,15 @@ app.get('/', (req, res) => {
     var socket = io('http://localhost:3000/');
     socket.emit('connection');
     res.render('main');
-    socket.emit('myID', {id: 1000});
+    //socket.emit('myID', {id: 1000});
+    res.end();
+});
+
+app.get('/room', (req, res) => {
+    var socket = io('http://localhost:3000/');
+    socket.emit('connection');
+    res.render('waiting', {roomNum: req.query.id});
+    socket.emit('joinRoom', {roomNum: req.query.id});
     res.end();
 });
 

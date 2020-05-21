@@ -7,30 +7,40 @@ html
             $(document).ready(function(){
                 $('.modal').modal();
                 socket = io('http://localhost:3000/');
+                socket.on('roomUsed', data => {
+                    document.getElementById("createError").innerHTML = "Room already exists. Pick another game ID.";
+                });
+                socket.on('roomCreated', data => {
+                    document.location.href = "/room?id=" + data.roomNum;
+                });
+                socket.on('confirmJoin', data => {
+                    document.location.href = "/room?id=" + data.roomNum;
+                });
             });
             function createRoom(roomNum) {
                 console.log(roomNum);
                 socket.emit('createRoom', {roomNum: roomNum});
             }
-
+            function joinRoom(roomNum) {
+                socket.emit('joinRoom', {roomNum: roomNum});
+            }
     body
         div(id="join",class="modal")
             div(class="modal-content")
                 h4 Enter game code:
                 br
                 br
-                form(method="POST",action="/joinGame")
-                    div(class="input-field inline col s6")
-                        input(id="joinGameID" type="text" class="validate")
-                        label(for="joinGameID") Game ID
-                    submit(class="waves-effect waves btn-flat blue-text") Join room           
+                div(class="input-field inline col s6")
+                    input(id="joinGameID" type="text" class="validate")
+                    label(for="joinGameID") Game ID
+                button(class="waves-effect waves btn-flat blue-text",onClick='joinRoom(document.getElementById("joinGameID").value)') Join room         
 
         
         div(id="create",class="modal")
             div(class="modal-content")
                 h4 Enter game code:
                 br
-                br
+                p(id="createError",class="red-text") &nbsp;
                 div(class="input-field inline col s6")
                     input(id="createGameID" type="text" class="validate")
                     label(for="createGameID") Game ID
