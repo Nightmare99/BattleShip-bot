@@ -7,11 +7,11 @@
         </div>
         <div class="row">
             <div class="col-sm">
-                <div class="input-group m-3">
+                <div class="input-group">
                     <div class="input-group-prepend">
                         <button class="btn btn-outline-primary" type="button" v-on:click="createRoom">Create room</button>  
                     </div>
-                    <input type="text" class="form-control w-25 text-center" placeholder="Enter room ID">
+                    <input type="text" class="form-control text-center" placeholder="Enter room ID">
                     <div class="input-group-append">
                         <button class="btn btn-outline-primary" type="button" v-on:click="joinRoom">Join room</button>
                     </div>
