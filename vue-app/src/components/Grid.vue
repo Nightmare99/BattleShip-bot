@@ -18,6 +18,9 @@ export default {
     components: {
         Cell
     },
+    props: {
+        player: String
+    },
     data() {
         return {
             selectedCells: []

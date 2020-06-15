@@ -1,10 +1,6 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <router-view @join-room="joinRoom" @create-room="createRoom"/>
   </div>
 </template>
 
@@ -15,6 +11,14 @@ export default {
   created() {
     var socket = io('http://localhost:3000/');
     socket.emit('myID', {id: 'this is an ID'});
+  },
+  methods: {
+    joinRoom() {
+      console.log('joining room...');
+    },
+    createRoom() {
+      console.log('creating room...')
+    }
   }
 }
 </script>
@@ -38,6 +42,6 @@ export default {
 }
 
 #nav a.router-link-exact-active {
-  color: #42b983;
+  color: hsl(244, 100%, 55%);
 }
 </style>
