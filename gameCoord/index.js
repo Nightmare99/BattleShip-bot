@@ -18,14 +18,14 @@ io.sockets.on('connection', function (socket) {
     });
 
     socket.on('createRoom', data => {
-        if (isRoomAvailable(data.roomNum)) {
-            gameList.push(data.roomNum);
+        if (isRoomAvailable(data)) {
+            gameList.push(data);
             console.log(gameList);
-            socket.emit('roomCreated', {roomNum: data.roomNum});
-            socket.join(data.roomNum);
+            socket.emit('roomCreated', {roomNum: data});
+            socket.join(data);
         }
         else {
-            console.log('room: ' + data.roomNum + ' under use');
+            console.log('room: ' + data + ' under use');
             socket.emit('roomUsed');
         }
     });

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <router-view @join-room="joinRoom" @create-room="createRoom"/>
+    <router-view @join-room="joinRoom" @create-room="createRoom" ref="child"/>
   </div>
 </template>
 
@@ -9,15 +9,22 @@ import io from 'socket.io-client';
 
 export default {
   created() {
-    var socket = io('http://localhost:3000/');
-    socket.emit('myID', {id: 'this is an ID'});
+    this.socket = io('http://localhost:3000/');
+    this.socket.emit('myID', {id: 'this is an ID'});
+  },
+  mounted() {
+    this.socket.on('roomUsed', () => {
+      console.log('room number already taken');
+      this.$refs.child.displayError();
+    }); 
   },
   methods: {
     joinRoom() {
       console.log('joining room...');
     },
-    createRoom() {
-      console.log('creating room...');
+    createRoom(data) {
+      console.log('creating room...' + data);
+      this.socket.emit('createRoom', data);
     }
   }
 }
