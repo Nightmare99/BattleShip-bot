@@ -17,7 +17,7 @@ export default {
       console.log('joining room...');
     },
     createRoom() {
-      console.log('creating room...')
+      console.log('creating room...');
     }
   }
 }
